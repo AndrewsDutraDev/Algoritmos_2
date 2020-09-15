@@ -30,6 +30,12 @@ class List:
                     print("Não há espaço suficiente no vetor")
         print(self.list)
 
+    def remove(self, position):
+        for element in range(0, self.size):
+            if (element == position-1):
+                self.list[element] = None
+        print(self.list)
+
 
 
 
@@ -49,9 +55,12 @@ while iniciar:
     print('2 - Remover produto da lista.')
     print('3 - Localizar produto na lista.')
     print('4 - Limpar lista.')
-    operacao = int(input('Qual operação deseja realizar? '))
-    if (operacao == 0):
+    operation = int(input('Qual operação deseja realizar? '))
+    if (operation == 0):
         iniciar = False
-    if (operacao == 1):
-        produto = Product(input("Qual o nome do produto: "))
-        lista.put_list(int(input("Digite a posição do produto: ")),produto.name)
+    if (operation == 1):
+        product = Product(input("Qual o nome do produto: "))
+        lista.put_list(int(input("Digite a posição do produto: ")),product.name)
+    if (operation == 2):
+        pos = int(input("Digite a posição do produto que você quer remover: "))
+        lista.remove(pos)
