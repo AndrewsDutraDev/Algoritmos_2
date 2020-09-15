@@ -36,12 +36,19 @@ class List:
                 self.list[element] = None
         print(self.list)
 
+    def get_list(self):
+        return self.list
+    
+    def get_product(self, product):
+        for element in range(0, self.size):
+            if self.list[element] == product:
+                return element + 1
 
+    def clear_list(self):
+        for element in range(0, self.size):
+            self.list[element] = None
 
-
-
-
-
+    
 
 
 
@@ -49,7 +56,7 @@ class List:
 lista = List(int(input('Qual o tamanho da sua lista? ')))
 iniciar = True
 while iniciar:
-    # print('Lista atualizada: ',lista.exibirlista())
+    print('\nLista atualizada: ',lista.get_list())
     print('0 - Sair do programa')
     print('1 - Inserir produto a lista.')
     print('2 - Remover produto da lista.')
@@ -64,3 +71,8 @@ while iniciar:
     if (operation == 2):
         pos = int(input("Digite a posição do produto que você quer remover: "))
         lista.remove(pos)
+    if (operation == 3):
+        product = input("Digite o nome do produto que você quer encontrar: ")
+        print("O produto está na posição: "+str(lista.get_product(product)))
+    if (operation == 4):
+        lista.clear_list()
