@@ -13,28 +13,22 @@ class List:
             if self.list[num_nones] == None:
                 count_none += 1
         for element in range(0, self.size):
-            print("elemento: "+str(element))
-            print("quantidade de none: "+str(count_none))
             if ((self.list[element] == None) and (element < position)): 
-                print("primeiro")
                 self.list[element] = product
                 break
             elif (self.list[element] != None and (element == position-1)):
-                print("segundo")
                 if (count_none >= 1):
                     for last_element in range(self.size-1, 0, -1 ):
-                        print("último elemento: "+str(self.list[last_element]))
                         self.list[last_element] = self.list[(last_element)-1]
                     self.list[position-1] = product
                 else:
-                    print("Não há espaço suficiente no vetor")
-        print(self.list)
+                    return
 
     def remove(self, position):
         for element in range(0, self.size):
             if (element == position-1):
                 self.list[element] = None
-        print(self.list)
+        
 
     def get_list(self):
         return self.list
