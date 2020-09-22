@@ -1,3 +1,5 @@
+# Trabalho feito em conjunto por Andrews Dutra, Guilherme Steglich e Mateus Marques
+
 class Product:
     def __init__(self,name):
         self.name = name
