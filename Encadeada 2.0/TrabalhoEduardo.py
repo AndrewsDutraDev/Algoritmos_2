@@ -27,7 +27,8 @@ class ListaEnc():
 
     def insere(self, produto, posicao):
         if (posicao >= 1):
-            if self.lista[0] == None:
+            #Adicionar posição = 1
+            if self.lista[0] == None and posicao == 1:
                 self.lista = [None] * 2
                 self.lista[0] = produto
             else:
@@ -36,7 +37,7 @@ class ListaEnc():
                 for x in listaAuxiliar:
                     cont = cont + 1
                 tamanho_novo = cont + 1
-                if posicao > tamanho_novo:
+                if posicao > cont:
                     print('Posição inválida')
                 else:
                     self.lista = [None] * (tamanho_novo)
@@ -84,9 +85,14 @@ class ListaEnc():
 executar = True
 lista = ListaEnc()
 produto = Produto()
+lista_sec = ListaEnc()
+produto_sec = Produto()
+
+# Import sendo realizado de outro arquivo para execução da tarefa 2 utilizando as classes e métodos já definidos.
+from TAD_Tarefa2 import *
 
 while executar:
-    opcao = int(input('Adicionar = 1, remover = 2, imprimir = 3, sair = 4: '))
+    opcao = int(input('Adicionar = 1, remover = 2, imprimir = 3, sair = 4, tamanho = 5, comparação = 6: '))
 
     if opcao == 1:        
         item = input('Qual o produto ?')
@@ -105,6 +111,21 @@ while executar:
 
     if opcao == 4:
         executar = False
+
+    if opcao == 5:
+        print('A lista tem tamanho: '+str(n_element(lista.imprime())))
+
+    if opcao == 6:
+        print('Você está na segunda lista')
+        times = int(input('Quantos valores você quer adicionar na lista secundária? '))
+        for i in range(0, times):
+            item = input('Qual o '+str(i+1)+'° produto ?')
+            vencimento = input('Qual o vencimento ?')
+            produto_sec.setItem(item)
+            produto_sec.setValidade(vencimento)
+            posicao = int(input('Qual a posição deseja inserir na lista? '))
+            lista_sec.insere(produto_sec.getProduto(), posicao)
+        print('As listas são iguais? '+str(compare_list(produto.getProduto(),produto_sec.getProduto())))
     
     
 
