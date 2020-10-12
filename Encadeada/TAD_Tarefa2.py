@@ -19,4 +19,6 @@ def compare_list(arrayList, another_list):
                         equallity = True
     return equallity
 
+def inverter()
+
         

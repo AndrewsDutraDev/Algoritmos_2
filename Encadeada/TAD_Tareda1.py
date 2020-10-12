@@ -79,13 +79,13 @@ class ListaEnc():
         tamanho_lista = 0
         for x in self.lista:
             tamanho_lista += 1
-        if posicao > tamanho_lista or posicao < tamanho_lista:
+        if posicao > tamanho_lista or posicao < 1:
             print('Posicao inválida')
         else:
             for x in range(0, posicao):
                 if (x + 1) == posicao:
-                    valor = self.lista[x]
-                    return valor
+                    print('O produto é, ',str(self.lista[x][0]),' seu vencimento é ',str(self.lista[x][1]))
+                    
 
     def valor(self, produto):
         tamanho_lista = 0
@@ -142,11 +142,11 @@ while executar:
 
     if opcao == 4:
         produto = input('Qual o produto? ')
-        print(lista.valor(produto))
+        lista.valor(produto)
     
     if opcao == 5:
         posicao = int(input('Em qual posição o produto está? '))
-        print('Este é o poduto da posição ',str(posicao),' ',str(lista.posicao(posicao)))
+        lista.posicao(posicao)
 
     if opcao == 6:
         print('A lista tem tamanho: '+str(n_element(lista.imprime())))
