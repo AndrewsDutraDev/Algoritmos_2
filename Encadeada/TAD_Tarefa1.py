@@ -163,6 +163,10 @@ while executar:
             lista_sec.insere(produto_sec.getProduto(), posicao)
         print('As listas são iguais? '+str(compare_list(produto.getProduto(),produto_sec.getProduto())))
     
+    if opcao == 8:
+        lista_inv = lista.imprime()
+        print('Lista invertida : ',str(inverter(lista_inv)))
+    
     if opcao == 9:
         executar = False
 

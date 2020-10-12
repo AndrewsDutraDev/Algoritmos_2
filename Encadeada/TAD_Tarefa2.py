@@ -19,6 +19,15 @@ def compare_list(arrayList, another_list):
                         equallity = True
     return equallity
 
-def inverter()
+def inverter(lista):
+    tamanho_lista = 0
+    for x in lista:
+        tamanho_lista += 1
+    aux = 1
+    lista_nova = [None] * tamanho_lista
+    for x in range(tamanho_lista - 2, -1, -1 ):
+        lista_nova[aux] = ('<--',lista[x][0],lista[x][1])
+        aux += 1
+    return lista_nova
 
         
