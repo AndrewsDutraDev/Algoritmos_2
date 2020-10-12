@@ -52,8 +52,7 @@ class ListaEnc():
                             else:
                                 self.lista[x] = listaAuxiliar[x]
         else:
-            print('Posição inválida')
-                  
+            print('Posição inválida')                 
                                 
     def remove(self, posicao):
         listaAuxiliar = self.lista
@@ -71,16 +70,39 @@ class ListaEnc():
             for x in range(0, posicao):
                 self.lista[x] = listaAuxiliar[x]
             for x in range(posicao, tamanho_novo):
-                self.lista[x] = listaAuxiliar[x + 1]
-        
-           
+                self.lista[x] = listaAuxiliar[x + 1]       
 
     def imprime(self):
         return self.lista
     
-    #def posicao(self):
+    def posicao(self, posicao):
+        tamanho_lista = 0
+        for x in self.lista:
+            tamanho_lista += 1
+        if posicao > tamanho_lista or posicao < tamanho_lista:
+            print('Posicao inválida')
+        else:
+            for x in range(0, posicao):
+                if (x + 1) == posicao:
+                    valor = self.lista[x]
+                    return valor
 
-    #def valor(self):
+    def valor(self, produto):
+        tamanho_lista = 0
+        for x in self.lista:
+            tamanho_lista += 1
+        for x in range(0, tamanho_lista - 1):
+            if produto in self.lista[x]: 
+                print('Produto está na posição ',str(x + 1))
+                return
+            else:
+                produto_ausente = True
+        if produto_ausente:
+            print('Produto não encontrado.')
+            return
+
+    def desroi(self):
+        self.lista = [None]
 
 executar = True
 lista = ListaEnc()
@@ -92,7 +114,16 @@ produto_sec = Produto()
 from TAD_Tarefa2 import *
 
 while executar:
-    opcao = int(input('Adicionar = 1, remover = 2, imprimir = 3, sair = 4, tamanho = 5, comparação = 6: '))
+    print('Adicionar = 1')
+    print('Remover = 2')
+    print('Imprimir = 3')
+    print('Valor = 4')
+    print('Posição = 5')
+    print('Tamanho = 6')
+    print('Comparação = 7')
+    print('Inverter = 8')
+    print('Sair = 9')
+    opcao = int(input('Qual opção deseja? '))
 
     if opcao == 1:        
         item = input('Qual o produto ?')
@@ -110,12 +141,17 @@ while executar:
         print(lista.imprime())
 
     if opcao == 4:
-        executar = False
-
+        produto = input('Qual o produto? ')
+        print(lista.valor(produto))
+    
     if opcao == 5:
-        print('A lista tem tamanho: '+str(n_element(lista.imprime())))
+        posicao = int(input('Em qual posição o produto está? '))
+        print('Este é o poduto da posição ',str(posicao),' ',str(lista.posicao(posicao)))
 
     if opcao == 6:
+        print('A lista tem tamanho: '+str(n_element(lista.imprime())))
+
+    if opcao == 7:
         print('Você está na segunda lista')
         times = int(input('Quantos valores você quer adicionar na lista secundária? '))
         for i in range(0, times):
@@ -127,5 +163,6 @@ while executar:
             lista_sec.insere(produto_sec.getProduto(), posicao)
         print('As listas são iguais? '+str(compare_list(produto.getProduto(),produto_sec.getProduto())))
     
-    
+    if opcao == 9:
+        executar = False
 
