@@ -1,3 +1,5 @@
+# Trabalho feito em conjunto por Andrews Dutra, Guilherme Steglich e Mateus Marques
+
 def n_element(arrayList):
     size = 0
     for elemento in arrayList:

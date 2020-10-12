@@ -1,3 +1,5 @@
+# Trabalho feito em conjunto por Andrews Dutra, Guilherme Steglich e Mateus Marques
+
 class Produto():
     
     def __init__(self):
