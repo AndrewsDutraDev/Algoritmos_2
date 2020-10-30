@@ -30,23 +30,6 @@ class PilhaEnc:
         while (not self.vazia()):
             self.remove_top()
 
-PilhaEnc = PilhaEnc()
-iniciar = True
-while iniciar:
-    print('0 - Sair do programa')
-    print('1 - Inserir nó do topo da pilha.')
-    print('2 - Remover nó do topo da pilha.')
-    print('3 - Consultar nó do topo da pilha')
-    print('4 - Destruir pilha')
-    operation = int(input('Qual operação deseja realizar? '))
-    if (operation == 0):
-        iniciar = False
-    if (operation == 1):
-        value = input("Qual o valor do nó: ")
-        print(PilhaEnc.insert_top(value))
-    if (operation == 2):
-        PilhaEnc.remove_top()
-    if (operation == 3):
-        print("O conteúdo do topo é: "+str(PilhaEnc.query()))
-    if (operation == 4):
-        PilhaEnc.destroy()
+    
+        
+

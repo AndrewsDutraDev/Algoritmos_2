@@ -20,25 +20,30 @@ class Pilha:
                
     def destroy(self):
         self.topo = self.base - 1
+    
+    def get_list(self):
+        return self.list
+    
+    def cont(self, listAux):
+        contList = 0
+        for i in listAux:
+            contList += 1
+        return contList
 
-pilha = Pilha(int(input('Qual o tamanho da sua pilha? ')))
-iniciar = True
-while iniciar:
-    #print('\nLista atualizada: ',lista.get_list())
-    print('0 - Sair do programa')
-    print('1 - Inserir nó do topo da pilha.')
-    print('2 - Remover nó do topo da pilha.')
-    print('3 - Consultar nó do topo da pilha')
-    print('4 - Destruir pilha')
-    operation = int(input('Qual operação deseja realizar? '))
-    if (operation == 0):
-        iniciar = False
-    if (operation == 1):
-        value = input("Qual o valor do nó: ")
-        pilha.insert_top(value)
-    if (operation == 2):
-        pilha.remove_top()
-    if (operation == 3):
-        print("O conteúdo do topo é: "+str(pilha.query()))
-    if (operation == 4):
-        pilha.destroy()
+    def compare(self, list_one, list_two):
+        contOne = self.cont(list_one)
+        contTwo = self.cont(list_two)
+        equallity = True
+        if contOne != contTwo:
+            equallity = False
+        else:
+            while contOne >= 0:
+                if list_one[contOne-1] == list_two[contOne-1]:
+                    contOne -= 1
+                else:
+                    equallity = False
+                    break
+        return equallity
+
+
+
