@@ -1,3 +1,5 @@
+# TRABALHO FEITO POR ANDREWS DUTRA, GUILHERME STEGLICH E MATEUS MARQUES
+
 # Importação das classes e funções de cada TAD
 
 from TAD_ContiguidadeFisica import Pilha
