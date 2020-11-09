@@ -1,5 +1,9 @@
+# Importação das classes e funções de cada TAD
+
 from TAD_ContiguidadeFisica import Pilha
 from TAD_Encadeamento import PilhaEnc
+
+# Arquivo para execução de ambos tipos de pilhas.
 
 print('Digite 1 - contiguidade , 2- encadeamento')
 type_list = int(input('Digite o tipo de lista desejado:'))
@@ -10,13 +14,12 @@ if(type_list == 1 ):
 else:
     lista = PilhaEnc()
 while iniciar:
-    #print('\nLista atualizada: ',lista.get_list())
     print('0 - Sair do programa')
     print('1 - Inserir nó do topo da pilha.')
     print('2 - Remover nó do topo da pilha.')
     print('3 - Consultar nó do topo da pilha')
     print('4 - Destruir pilha')
-    print('5 - Comparar lista')
+    print('5 - Comparar listas')
     operation = int(input('Qual operação deseja realizar? '))
     if (operation == 0):
         iniciar = False
