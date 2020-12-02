@@ -4,7 +4,7 @@
 
 ## :heavy_check_mark: Conteúdos abordados:
 > 1° semestre:
-- [:white_check_mark] Listas
+- [x] Listas
 - [x] Pilhas
 - [x] Filas
 - [x] Tabelas
