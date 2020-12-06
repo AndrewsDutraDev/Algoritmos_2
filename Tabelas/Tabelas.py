@@ -1,22 +1,64 @@
 class Table:
     def __init__(self, tamanho):
         self.chave = [None]*(tamanho)
-        self.valor = [None]*tamanho)
-        self.limite_inicial = 0
-        self.limite_final = tamanho
+        self.valor = [None]*(tamanho)
+        self.tamanho = tamanho
+        #self.limite_inicial = 0
+        #self.limite_final = tamanho
 
-    def consultar(self):
-    def inserir(self):
-    def inserir_ordenada(self):
+    def consultar(self, chave):
+        cont = 0
+        for x in self.chave:
+            cont += 1
+            if x == chave:
+                return 'Os registro da chave ' + self.chave[cont] + ' são: ' + self.valor[cont]
+        return 'Vazio'
+
+    def inserir(self, posicao, chave, valor):
+        if not self.cheia() and not busca_sequencial(chave):
+            if self.pos_vazia(posicao):
+                for x in range(0, self.tamanho):
+                    if x == None:
+                        self.chave[x] = chave
+                        self.valor[x] = valor
+            else:
+                for x in range(0, self.tamanho):
+                    if x == posicao:
+
+    #def inserir_ordenada(self):
+
     def remover(self):
     def destruir(self):
-    def buscar(self):
-    def busca_sequencial(self):
+    #def buscar(self):
+    def busca_sequencial(self, chave):
+        if not self.vazia():
+            for x in self.chave:
+                if x == chave:
+                    return True
+            return False
+        else:
+            return
+
     def busca_binaria(self):
 
     #Complementares
+    def pos_vazia(self, posicao):
+        if self.chave == None:
+            return True
+        else:
+            return False
+    
     def vazia(self):
+        if self.chave[0] == None:
+            return True
+        else:
+            return False
+
     def cheia(self):
+        for x in self.chave:
+            if x == None:
+                return False
+    return True
     
 
 
