@@ -1,3 +1,5 @@
+#Trabalho feito por Andrews Dutra, Guilherme Steglich, Mateus Marques
+
 class Table:
     def __init__(self, maxSize):
         self.key = [None]*(maxSize)
@@ -32,7 +34,9 @@ class Table:
     ######### O método Search deve chamar o método busca linear ou busca binária. ####
     def search(self, target, search_key):
         if target == "bin":
-            return self.search_bin(search_key)
+            start = self.start
+            end = self.end_limit
+            return self.search_bin(search_key, start, end)
         return self.search_lin(search_key)
     
     def search_lin(self, search_key): #busca linear
@@ -51,23 +55,17 @@ class Table:
                         (self.value[j], self.value[j + 1]) = (self.value[j + 1], self.value[j])
             return self.key
 
-    def search_bin(self, search_key): #função para buscar de forma binária
+    def search_bin(self, search_key, start, end): #função para buscar de forma binária
         if not self.empty():
             self.sort()
-            if (self.size() % 2 != 0):
-                mid = int((self.size())/2) + 1
-            else: 
-                mid = int((self.size())/2)
-            if (self.key[mid] >= search_key):
-                if (self.key[mid] == search_key):
-                    return mid+1
-                for i in range(0, mid):
-                    if (self.key[i] == search_key):
-                        return i+1
+            mid = ((start + end) // 2)
+            if self.key[mid] == search_key:
+                return mid + 1
+            if (search_key < self.key[mid]):
+                return self.search_bin(search_key, start, mid - 1)
             else:
-                for i in range(mid, self.size()):
-                    if (self.key[i] == search_key):
-                        return i+1
+                return self.search_bin(search_key, mid + 1, end)
+        return
          
     ######### Além do método insert, deve ter o Insert ordenado para que a lista fique ordenada         
     def insert(self, insert_key, insert_value):
