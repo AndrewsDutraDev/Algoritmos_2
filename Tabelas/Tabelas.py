@@ -1,146 +1,110 @@
 class Table:
-    def __init__(self, tamanho):
-        self.chave = [None]*(tamanho)
-        self.valor = [None]*(tamanho)
-        self.tamanho = tamanho
+    def __init__(self, maxSize):
+        self.key = [None]*(maxSize)
+        self.value = [None]*(maxSize)
+        self.start_limit = 1
+        self.end_limit = maxSize
+        self.start = self.start_limit - 1
+        self.end = self.end_limit + 1
+    
+    def __repr__(self):
+        string = ""
+        if (not self.empty()):
+            for i in range(self.start-1, self.end):
+                string = string + str(self.key[i]) + ": " +str(self.value[i]) + "\n"
+        return string + "\n"
+    
+    ###verifica se está vazia###
+    def empty(self):
+        return self.start < self.start_limit and self.end > self.end_limit
+    
+    ##verifica se está cheia###
+    def full(self):
+        return (self.start == self.start_limit and self.end == self.end_limit)
+    
+    ###verifica o tamanho da tabela###
+    def size(self):
+        if not self.empty():
+            return self.end - self.start + 1
+        else:
+            return 0
 
-    def consultar(self, chave):
-        cont = 0
-        for x in self.chave:
-            cont += 1
-            if x == chave:
-                return 'Os registro da chave ' + self.chave[cont] + ' são: ' + self.valor[cont]
-        return 'Registro não encontrado.'
+    ######### O método Search deve chamar o método busca linear ou busca binária. ####
+    def search(self, target, search_key):
+        if target == "bin":
+            return self.search_bin(search_key)
+        return self.search_lin(search_key)
+    
+    def search_lin(self, search_key): #busca linear
+        if not self.empty():
+            for i in range(self.start-1, self.end):
+                if self.key[i] == search_key:
+                    return i+1
+        return 0
 
-    def inserir(self, posicao, chave, valor):
-        if not self.cheia() and not self.busca(chave):
-            if self.chave[posicao] == None:
-                for x in range(0, self.tamanho):
-                    if self.chave[x] == None:
-                        self.chave[x] = chave
-                        self.valor[x] = valor
-                        return
+    def sort(self): #Função para ordenar a tabela 
+        if not self.empty():
+            for i in range(self.size() - 1, 0, -1):
+                for j in range(i):
+                    if self.key[j] > self.key[j + 1]:
+                        (self.key[j], self.key[j + 1]) = (self.key[j + 1], self.key[j])
+                        (self.value[j], self.value[j + 1]) = (self.value[j + 1], self.value[j])
+            return self.key
+
+    def search_bin(self, search_key): #função para buscar de forma binária
+        if not self.empty():
+            self.sort()
+            if (self.size() % 2 != 0):
+                mid = int((self.size())/2) + 1
+            else: 
+                mid = int((self.size())/2)
+            if (self.key[mid] >= search_key):
+                if (self.key[mid] == search_key):
+                    return mid+1
+                for i in range(0, mid):
+                    if (self.key[i] == search_key):
+                        return i+1
             else:
-                for x in range(0, self.tamanho):
-                    if x == posicao:
-                        for i in range(x, self.tamanho): 
-                            self.chave[x + 1] = self.chave[i - 1]
-                            self.valor[x + 1] = self.valor[i - 1]
-                        self.chave[x] = chave
-                        self.valor[x] = valor
-                        return
-        else:
-            return
-
-    def inserir_ordenada(self, chave, valor):
-        produto_adicionado = False
-        if not self.cheia() and not self.busca(chave):
-            if self.vazia():
-                self.chave[0] = chave
-                self.valor[0] = valor
-                return 'Inserido'
+                for i in range(mid, self.size()):
+                    if (self.key[i] == search_key):
+                        return i+1
+         
+    ######### Além do método insert, deve ter o Insert ordenado para que a lista fique ordenada         
+    def insert(self, insert_key, insert_value):
+        position = self.search(insert_key, "lin")
+        if (position > 0):
+            self.key[position] = insert_key
+            self.value[position] = insert_value
+        elif (not self.full()):
+            if (self.empty()):
+                self.start = self.start_limit
+                self.end = self.start_limit
             else:
-                for x in range(0, self.tamanho):
-                    if chave[0] < self.chave[x][0]:
-                        for i in range(x, self.tamanho): 
-                            self.chave[i] = self.chave[i + 1]
-                            self.valor[i] = self.valor[i + 1]
-                        self.chave[x] = chave
-                        self.valor[x] = valor
-                        produto_adicionado = True
-                        return 'Inserido'
-                    elif chave[0] == self.chave[x][0]:
-                        for i in self.chave[x]:
-                            if chave[x + 1] < i:
-                                for b in range(x, self.tamanho): 
-                                    self.chave[b] = self.chave[b + 1]
-                                    self.valor[b] = self.valor[b + 1]
-                                self.chave[x] = chave
-                                self.valor[x] = valor
-                                produto_adicionado = True
-                                return 'Inserido'
-                if not produto_adicionado:
-                    for x in range(0, self.tamanho):
-                        if x == None:
-                            self.chave[x] = chave
-                            self.valor[x] = valor  
-                            return 'Inserido'
-        return 'Não inserido'        
-
-    def remover(self, chave):
-        if not self.vazia() and self.busca(chave):
-            for x in range(0, self.tamanho):
-                if self.chave[x] == chave:
-                    self.chave[x] == None
-                    for i in range(x, self.tamanho):
-                        self.chave[i] = self.chave[i + 1]
-                        self.valor[i] = self.valor[i + 1]
-                    return 'Removido'
-        else:
-            return 'Não removido'
+                self.end += 1
+            self.key[self.end-1] = insert_key
+            self.value[self.end-1] = insert_value
     
-    def atualizar(self):
-        return self.chave
+    def insert_sort(self, insert_key, insert_value): #função que insere de forma ordenada na tabela
+        self.insert(insert_key, insert_value) 
+        self.sort()
 
-    def destruir(self):
-        self.chave = [None] * self.tamanho
-        return
+    def consult(self, search_key, target): #função que consulta um valor 
+        position = self.search(target, search_key)
+        if position > 0:
+            self.value[position]
+        
+
+    def delete(self, delete_key, target): #função que deleta dado valor da tabela
+        position = self.search(target, delete_key)
+        if (position > 0):
+            for i in range(position-1, self.end-1):
+                self.key[i] = self.key[i+1]
+                self.value[i] = self.value[i+1]
+            self.end -= 1
+        return self.__repr__()
     
-    def busca(self, chave):
-        if not self.vazia():
-            for x in self.chave:
-                if x == chave:
-                    return True
-            return False
-        else:
-            return False
-
-    #def busca_binaria(self, chave):
-        #if not self.vazia():
-            #m = self.tamanho//2
-            #if self.chave[m] == chave:
-                #return m
-            #elif chave < self.chave[m]:
-                #return self.busca_binaria(chave)
-            #binario = self.tamanho // 2
-            #lista_aux = self.chave
-            #while binario != 1:
-                #if lista_aux[binario][0] > chave[0]:
-                    #for x in range(0, binario):
-                        #lista_aux[x] = self.chave[x]
-                    #binario = self.tamanho // 2
-                        
-
-    #Complementares
-    def vazia(self):
-        if self.chave[0] == None:
-            return True
-        else:
-            return False
-
-    def cheia(self):
-        for x in self.chave:
-            if x == None:
-                return False
-        return True
-    
-table = Table(int(input('Qual o tamanho da sua Tabela? ')))
-itens = ['marca', 'modelo', 'ano', 'proprietário']
-iniciar = True
-while iniciar:
-    print('Tabela atualizada: ',table.atualizar())
-    print('0 - Sair do programa')
-    print('1 - Inserir registro a lista.')
-    print('2 - Consultar chave.')
-    print('')
-    print('')
-    operation = int(input('Qual operação deseja realizar? '))
-    if (operation == 0):
-        iniciar = False
-    if (operation == 1):
-        chave = input("Qual a chave do veículo: ")
-        posicao = int(input("Qual a posicao: "))
-        valores = [None]*4
-        for x in range(0, 4):
-            valores[x] = input('Qual '+str(itens[x])+':')
-        table.inserir(posicao - 1, chave, valores)       
+    ### destroi toda a tabela ###
+    def destroy(self):
+        self.start = self.start_limit - 1
+        self.end = self.end_limit + 1
+        
