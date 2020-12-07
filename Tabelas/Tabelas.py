@@ -14,23 +14,23 @@ class Table:
 
     def inserir(self, posicao, chave, valor):
         if not self.cheia() and not self.busca(chave):
-            if self.pos_vazia(posicao):
+            if self.chave[posicao] == None:
                 for x in range(0, self.tamanho):
-                    if x == None:
+                    if self.chave[x] == None:
                         self.chave[x] = chave
                         self.valor[x] = valor
-                        return 'Inserido'
+                        return
             else:
                 for x in range(0, self.tamanho):
                     if x == posicao:
                         for i in range(x, self.tamanho): 
-                            self.chave[i] = self.chave[i + 1]
-                            self.valor[i] = self.valor[i + 1]
+                            self.chave[x + 1] = self.chave[i - 1]
+                            self.valor[x + 1] = self.valor[i - 1]
                         self.chave[x] = chave
                         self.valor[x] = valor
-                        return 'Inserido'
-                        
-        return 'Não inserido'
+                        return
+        else:
+            return
 
     def inserir_ordenada(self, chave, valor):
         produto_adicionado = False
@@ -112,12 +112,6 @@ class Table:
                         
 
     #Complementares
-    def pos_vazia(self, posicao):
-        if self.chave == None:
-            return True
-        else:
-            return False
-    
     def vazia(self):
         if self.chave[0] == None:
             return True
@@ -145,8 +139,8 @@ while iniciar:
         iniciar = False
     if (operation == 1):
         chave = input("Qual a chave do veículo: ")
-        posicao = input("Qual a posicao: ")
+        posicao = int(input("Qual a posicao: "))
         valores = [None]*4
         for x in range(0, 4):
             valores[x] = input('Qual '+str(itens[x])+':')
-        table.inserir(posicao, chave, valores)       
+        table.inserir(posicao - 1, chave, valores)       
