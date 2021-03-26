@@ -9,6 +9,9 @@
 - [x] Filas
 - [x] Tabelas
 
+> 2° semestre:
+- [x] Recursão
+
 ---
  
 ## :rocket: Tecnologias utilizadas:
