@@ -2,37 +2,39 @@
 
 #1- Soma dos elementos de uma lista:
 def soma_elementos(lista):
-    if len(lista) == 1:
-        return lista[0]
-    else:
-        return lista[-1] + soma_elementos(lista[:-1])
+    soma = 0
+    for elem in lista:
+        soma = soma + elem
+    return soma
 
 #2- Fatorial de um determinado número
 def fatorial(n):
-    if n == 1:
-        return 1
-    else:
-        return n * fatorial(n-1)
+    total = n 
+    while n > 1:
+        total = total * (n-1)
+        n = n-1
+    return total
 
 #3- Fibonacci de um determinado número: 
-def fibonacci(n):
-    if n == 1:
-        return 1
-    if n == 0:
-        return 0
-    else:
-        return fibonacci(n-1) + fibonacci(n-2)
+def fibonacci(N):
+    vetor = [0, 1]
+    if N > 1:
+       for i in range(2, N+1):
+           func = vetor[i - 1] + vetor[i - 2]
+           vetor.append(func)
+    # print( vetor)
+    return vetor[N]
 
 #4- Soma dos dígitos de um número inteiro
 def soma_digitos(n):
     if n <= 9:
         return n
-    else:
+    soma = 0
+    while n > 9:
         resto = n%10
         n = n//10
-        return resto + soma_digitos(n)
-
-    
+        soma = soma + resto
+    return soma + n   
 
 
 # print(soma_elementos([1, 2, 3,10]))
