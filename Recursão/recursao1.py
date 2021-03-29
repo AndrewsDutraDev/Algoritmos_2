@@ -10,7 +10,7 @@ def soma_elementos(lista):
 #2- Fatorial de um determinado número
 def fatorial(n):
     if n == 1:
-        return 1
+        return 1o
     else:
         return n * fatorial(n-1)
 
