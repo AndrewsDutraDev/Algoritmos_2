@@ -1,5 +1,7 @@
 # Trabalho feito em conjunto por Andrews Dutra, Guilherme Steglich e Mateus Marques
 
+# Import sendo realizado de outro arquivo para execução da tarefa 2 utilizando as classes e métodos já definidos.
+from TAD_Tarefa2 import *
 class Produto():
     
     def __init__(self):
@@ -106,6 +108,20 @@ class ListaEnc():
     def desroi(self):
         self.lista = [None]
 
+    def busca_linear_recursiva(self, contador, produto):
+        # Verificação para ver se a lista não é vazia
+        if n_element(self.lista) == 0:
+            return 
+        else:
+            # Comparação entre o indice da lista em análise, como o produto inserido pelo usuário. 
+            if self.lista[contador][0] == produto:
+                return contador +1
+            else:
+                # Acréscimo do contador para seguir percorrendo a lista
+                return self.busca_linear_recursiva(contador+1, produto)
+
+
+
 executar = True
 lista = ListaEnc()
 produto = Produto()
@@ -116,6 +132,8 @@ produto_sec = Produto()
 from TAD_Tarefa2 import *
 
 while executar:
+    print("-------------------------------------------")
+    print('Busca Linear Recursiva = 0')
     print('Adicionar = 1')
     print('Remover = 2')
     print('Imprimir = 3')
@@ -128,8 +146,8 @@ while executar:
     opcao = int(input('Qual opção deseja? '))
 
     if opcao == 1:        
-        item = input('Qual o produto ?')
-        vencimento = input('Qual o vencimento ?')
+        item = input('Qual o produto? ')
+        vencimento = input('Qual o vencimento? ')
         produto.setItem(item)
         produto.setValidade(vencimento)
         posicao = int(input('Qual a posição deseja inserir na lista? '))
@@ -172,3 +190,6 @@ while executar:
     if opcao == 9:
         executar = False
 
+    if opcao == 0:
+        produto = input('Qual o produto? ')
+        print('O produto está na posição: ',lista.busca_linear_recursiva(0, produto))
