@@ -109,8 +109,9 @@ class ListaEnc():
         self.lista = [None]
 
     def busca_linear_recursiva(self, contador, produto):
-        # Verificação para ver se a lista não é vazia
-        if n_element(self.lista) == 0:
+        # Verificação para ver se a lista não é vazia -  
+        # ou se o contador chegou em um valor maior que os índices da lista
+        if n_element(self.lista) == 0 or contador >= n_element(self.lista):
             return 
         else:
             # Comparação entre o indice da lista em análise, como o produto inserido pelo usuário. 
