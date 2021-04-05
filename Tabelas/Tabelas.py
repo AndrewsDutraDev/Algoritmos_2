@@ -37,14 +37,24 @@ class Table:
             start = self.start
             end = self.end_limit
             return self.search_bin(search_key, start, end)
+        if target == "lin_bin":
+            return self.search_lin_bin(search_key, 0)
         return self.search_lin(search_key)
     
+    #busca linear padrão
     def search_lin(self, search_key): #busca linear
         if not self.empty():
             for i in range(self.start-1, self.end):
                 if self.key[i] == search_key:
                     return i+1
         return 0
+    
+    #busca linear recursiva
+    def search_lin_bin(self, search_key, cont): #busca linear
+        if (self.key[cont] == search_key):
+            return cont + 1
+        else:
+            return self.search_lin_bin(search_key, cont + 1)
 
     def sort(self): #Função para ordenar a tabela 
         if not self.empty():
@@ -55,6 +65,7 @@ class Table:
                         (self.value[j], self.value[j + 1]) = (self.value[j + 1], self.value[j])
             return self.key
 
+    #busca recursiva binária
     def search_bin(self, search_key, start, end): #função para buscar de forma binária
         if not self.empty():
             self.sort()
