@@ -10,7 +10,7 @@ def soma_elementos(lista):
 #2- Fatorial de um determinado número
 def fatorial(n):
     if n == 1:
-        return 1o
+        return 1
     else:
         return n * fatorial(n-1)
 
@@ -41,7 +41,7 @@ def soma_digitos(n):
 # print(fatorial(2))
 # print(fatorial(3))
 # print(fatorial(4))
-# print(fatorial(5))
+print(fatorial(5))
 
 # print(fibonacci(6))
 
